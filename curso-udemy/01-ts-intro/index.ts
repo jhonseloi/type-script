@@ -1,1 +1,3 @@
-console.log('olá mundo.')
+const nome = 'José'
+
+console.log(nome)
