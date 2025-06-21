@@ -1,11 +1,13 @@
 {
-    "name": "01-ts-intro",
+    "name": "typescript-intro",
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .ts",
-        "lint:fix": "eslint . --ext .ts --fix"
+        "lint:fix": "eslint . --ext .ts --fix",
+        "dev": "webpack -w",
+        "build": "tsc"
     },
     "keywords": [],
     "author": "",
@@ -14,14 +16,16 @@
     "description": "",
     "devDependencies": {
         "@eslint/js": "^9.26.0",
-        "@types/node": "^22.15.18",
         "@typescript-eslint/eslint-plugin": "^8.32.1",
         "@typescript-eslint/parser": "^8.32.1",
         "eslint": "^9.26.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-prettier": "^5.4.0",
         "prettier": "^3.5.3",
+        "ts-loader": "^9.5.2",
         "ts-node": "^10.9.2",
-        "typescript": "^5.8.3"
+        "typescript": "^5.8.3",
+        "webpack": "^5.99.9",
+        "webpack-cli": "^6.0.1"
     }
 }
