@@ -20,4 +20,4 @@ const body3 = document.querySelector('body')!
 body3.style.background = 'blue'
 
 // Type assertion
-const body4 = (document.querySelector('body') as unknown) as number
+const body4 = document.querySelector('body') as unknown as number
