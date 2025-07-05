@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es2016" /* Define a versão da linguagem JavaScript para o código gerado e inclui declarações de bibliotecas compatíveis. */,
+        "lib": [
+            "ESNext",
+            "DOM"
+        ] /* Especifica um conjunto de arquivos de declaração de bibliotecas que descrevem o ambiente de execução alvo. */,
+        "module": "commonjs" /* Especifica qual tipo de código de módulo será gerado. */,
+        "moduleResolution": "node" /* Define como os módulos são resolvidos. "node" simula o comportamento do Node.js, necessário para suporte ao ts-node. */,
+        "outDir": "./dist" /* Redireciona a estrutura de saída para o diretório especificado. */,
+        "esModuleInterop": true /* Gera código JavaScript adicional para facilitar a importação de módulos CommonJS. Isso habilita 'allowSyntheticDefaultImports' para compatibilidade de tipos. */,
+        "forceConsistentCasingInFileNames": true /* Garante que a capitalização (maiúsculas/minúsculas) nos imports esteja correta. */,
+        "strict": true /* Ativa todas as opções de verificação de tipos mais rigorosas. */,
+        "skipLibCheck": true /* Ignora a verificação de tipo em todos os arquivos .d.ts. */
+    },
+    "include": ["./src"]
+}
