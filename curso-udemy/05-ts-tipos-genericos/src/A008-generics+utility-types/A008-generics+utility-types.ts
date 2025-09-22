@@ -39,7 +39,7 @@ const pessoa4: PessoaReadonly = {
 console.log(pessoa4)
 
 // Pick
-type PessoaPick = Pick<Pessoa, 'nome' | 'idade'>
+type PessoaPick = Pick<PessoaRequired, 'nome' | 'idade'>
 const pessoa5: PessoaPick = {
     nome: 'Savinho',
     idade: 21,
