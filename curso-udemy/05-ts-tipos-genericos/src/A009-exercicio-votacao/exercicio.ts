@@ -1,6 +1,6 @@
 type VotationOption = {
-    numberOfvotes: number
     option: string
+    numberOfVotes: number
 }
 
 export class Votation {
@@ -14,7 +14,7 @@ export class Votation {
 
     vote(votationIndex: number): void {
         if (!this._votationOptions[votationIndex]) return
-        this._votationOptions[votationIndex].numberOfvotes += 1
+        this._votationOptions[votationIndex].numberOfVotes += 1
     }
 
     get votationOptions(): VotationOption[] {
@@ -34,19 +34,19 @@ export class VotationApp {
             console.log(votation.details)
 
             for (const votationOption of votation.votationOptions) {
-                console.log(votationOption.option, votationOption.numberOfvotes)
+                console.log(votationOption.option, votationOption.numberOfVotes)
             }
 
-            console.log('###')
+            console.log('---')
             console.log('')
         }
     }
 }
 
 const votation1 = new Votation('Qual sua linguagem de programação favorita?')
-votation1.addVotationOption({ option: 'Python', numberOfvotes: 0 })
-votation1.addVotationOption({ option: 'JavaScript', numberOfvotes: 0 })
-votation1.addVotationOption({ option: 'TypeScript', numberOfvotes: 0 })
+votation1.addVotationOption({ option: 'Python', numberOfVotes: 0 })
+votation1.addVotationOption({ option: 'JavaScript', numberOfVotes: 0 })
+votation1.addVotationOption({ option: 'C#', numberOfVotes: 0 })
 votation1.vote(0)
 votation1.vote(1)
 votation1.vote(1)
@@ -55,14 +55,14 @@ votation1.vote(2)
 votation1.vote(2)
 
 const votation2 = new Votation('Qual sua cor favorita?')
-votation2.addVotationOption({ option: 'Azul', numberOfvotes: 0 })
-votation2.addVotationOption({ option: 'Vermelho', numberOfvotes: 0 })
-votation2.addVotationOption({ option: 'Verde', numberOfvotes: 0 })
-votation2.vote(0)
+votation2.addVotationOption({ option: 'Azul', numberOfVotes: 0 })
+votation2.addVotationOption({ option: 'Vermelho', numberOfVotes: 0 })
+votation2.addVotationOption({ option: 'Amarelo', numberOfVotes: 0 })
 votation2.vote(0)
 votation2.vote(0)
 votation2.vote(1)
-votation2.vote(2)
+votation2.vote(1)
+votation2.vote(1)
 votation2.vote(2)
 
 const votationApp = new VotationApp()
