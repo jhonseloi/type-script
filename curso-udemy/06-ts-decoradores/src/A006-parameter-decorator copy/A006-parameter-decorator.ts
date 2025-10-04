@@ -1,11 +1,11 @@
 function decorador(
     classPrototype: object,
-    nomeMetodo: string,
-    descriptor: PropertyDescriptor,
-): PropertyDescriptor | void {
+    nomeMetodo: string | symbol,
+    index: number,
+): any {
     console.log(classPrototype)
     console.log(nomeMetodo)
-    console.log(descriptor)
+    console.log(index)
 }
 
 export class Pessoa {
@@ -19,8 +19,7 @@ export class Pessoa {
         this.idade = idade
     }
 
-    @decorador
-    metodo(msg: string): string {
+    metodo(@decorador msg: string): string {
         return `${this.nome} ${this.sobrenome}: ${msg}`
     }
 
