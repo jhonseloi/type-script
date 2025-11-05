@@ -1,4 +1,4 @@
-// testes em bloco único
+// bloco único
 describe('TESTE 1', () => {
     it('should return 1', () => {
         const number = 1
@@ -11,17 +11,17 @@ describe('TESTE 1', () => {
     })
 })
 
-// testes em bloco separado
+// blocos separados
 describe('TESTE 2', () => {
     it('not should return José', () => {
-        const string = 'Carlos'
-        expect(string).not.toBe('José')
+        const name = 'Carlos'
+        expect(name).not.toBe('José')
     })
 })
 
 describe('TESTE 3', () => {
     test('should return Maria', () => {
-        const string = 'Maria'
-        expect(string).toBe('Maria')
+        const name = 'Maria'
+        expect(name).toBe('Maria')
     })
 })
