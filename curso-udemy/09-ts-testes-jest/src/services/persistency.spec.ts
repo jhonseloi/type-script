@@ -1,27 +1,25 @@
-// bloco único
-describe('TESTE 1', () => {
-    it('should return 1', () => {
-        const number = 1
-        expect(number).toBe(1)
+import { Persistency } from './persistency'
+
+describe('Persistency', () => {
+    afterEach(() => jest.clearAllMocks())
+
+    it('should return undefined', () => {
+        // System under test (sut)
+        const sut = new Persistency()
+        expect(sut.saveOrder()).toBeUndefined()
     })
 
-    test('not should return 10', () => {
-        const number = 1
-        expect(number).not.toBe(10)
+    it('should call console.log once', () => {
+        const sut = new Persistency()
+        const consoleSpy = jest.spyOn(console, 'log')
+        sut.saveOrder()
+        expect(consoleSpy).toHaveBeenCalledTimes(1)
     })
-})
 
-// blocos separados
-describe('TESTE 2', () => {
-    it('not should return José', () => {
-        const name = 'Carlos'
-        expect(name).not.toBe('José')
-    })
-})
-
-describe('TESTE 3', () => {
-    test('should return Maria', () => {
-        const name = 'Maria'
-        expect(name).toBe('Maria')
+    it('should call console.log with "Pedido salvo com sucesso!"', () => {
+        const sut = new Persistency()
+        const consoleSpy = jest.spyOn(console, 'log')
+        sut.saveOrder()
+        expect(consoleSpy).toHaveBeenCalledWith('Pedido salvo com sucesso!')
     })
 })
