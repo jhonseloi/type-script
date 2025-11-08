@@ -2,7 +2,7 @@ import { OrderStatus } from './interfaces/order-status'
 import { ShoppingCartProtocol } from './interfaces/shopping-cart-protocol'
 import { MessagingProtocol } from './interfaces/messaging-protocol'
 import { PersistencyProtocol } from './interfaces/persistency-protocol'
-import { CostumerOrder } from './interfaces/costumer-protocol'
+import { CustomerOrder } from './interfaces/customer-protocol'
 
 export class Order {
     private _orderStatus: OrderStatus = 'open'
@@ -11,7 +11,7 @@ export class Order {
         private readonly cart: ShoppingCartProtocol,
         private readonly messaging: MessagingProtocol,
         private readonly persistency: PersistencyProtocol,
-        private readonly costumer: CostumerOrder,
+        private readonly customer: CustomerOrder,
     ) {}
 
     get orderStatus(): OrderStatus {
@@ -32,7 +32,7 @@ export class Order {
         this.cart.clear()
 
         console.log(
-            `O cliente é ${this.costumer.getName()}, CPF/CNPJ: ${this.costumer.getIDN()}`,
+            `O cliente é ${this.customer.getName()}, CPF/CNPJ: ${this.customer.getIDN()}`,
         )
     }
 }

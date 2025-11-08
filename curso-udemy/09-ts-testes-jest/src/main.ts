@@ -4,7 +4,7 @@ import { Order } from './entities/order'
 import { Messaging } from './services/messaging'
 import { Persistency } from './services/persistency'
 import { Product } from './entities/product'
-import { IndividualCustomer } from './entities/interfaces/costumer'
+import { IndividualCustomer } from './entities/interfaces/customer'
 // import { MessagingProtocol } from './entities/interfaces/messaging-protocol'
 
 const fiftyPercentDiscount = new FiftyPercentDiscount()
