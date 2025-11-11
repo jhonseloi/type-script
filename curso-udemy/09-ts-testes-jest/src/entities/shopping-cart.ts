@@ -25,7 +25,7 @@ export class ShoppingCart implements ShoppingCartProtocol {
             .toFixed(2)
     }
 
-    totalWithDicount() {
+    totalWithDiscount() {
         return this.discount.calculate(this.total())
     }
 

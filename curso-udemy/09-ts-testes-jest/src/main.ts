@@ -41,7 +41,7 @@ shoppingCart.addItem(new Product('Lápis', 1.49))
 
 console.log(shoppingCart.items)
 console.log(shoppingCart.total())
-console.log(shoppingCart.totalWithDicount())
+console.log(shoppingCart.totalWithDiscount())
 console.log(order.orderStatus)
 order.checkout()
 console.log(order.orderStatus)
