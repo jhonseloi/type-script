@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ShoppingCartProtocol } from '../interfaces/shopping-cart-protocol'
-import { CartItem } from '../interfaces/cart-item'
-import { MessagingProtocol } from '../interfaces/messaging-protocol'
-import { PersistencyProtocol } from '../interfaces/persistency-protocol'
-import { CustomerOrder } from '../interfaces/customer-protocol'
+import { ShoppingCartProtocol } from './shopping-cart-protocol'
+import { CartItem } from './cart-item'
+import { MessagingProtocol } from './messaging-protocol'
+import { PersistencyProtocol } from './persistency-protocol'
+import { CustomerOrder } from './customer-protocol'
 
 export class ShoppingCartMock implements ShoppingCartProtocol {
     get items(): Readonly<CartItem[]> {

@@ -4,7 +4,7 @@ import {
     MessagingMock,
     PersistencyMock,
     CustomerMock,
-} from './mocks/order-class'
+} from './interfaces/order-mocks'
 
 const createSut = () => {
     const shoppingCartMock = new ShoppingCartMock()
