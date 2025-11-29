@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useInterval } from '../hooks/use-interval'
 import { Button } from './button'
 import { Timer } from './timer'
-import { secondsToTime } from '../utils/second-to-time'
+import { secondsToTime } from '../utils/seconds-to-time'
 
 const bellStart = require('../sounds/bell-start.mp3')
 const bellFinish = require('../sounds/bell-finish.mp3')
@@ -17,10 +17,13 @@ interface Props {
 }
 
 export function PomodoroTimer(props: Props) {
-    const cyclesFilled = new Array(props.cycles - 1).fill(true)
-    
+    const cyclesFilled = useMemo(
+        () => new Array(props.cycles - 1).fill(true),
+        [props.cycles]
+    )
+
     const [mainTime, setMainTime] = useState(props.pomodoroTime)
-    const [timeCouting, setTimeCouting] = useState(false)
+    const [timeCounting, setTimeCounting] = useState(false)
     const [working, setWorking] = useState(false)
     const [resting, setResting] = useState(false)
     const [cyclesQtdManager, setCyclesQtdManager] = useState(cyclesFilled)
@@ -29,30 +32,25 @@ export function PomodoroTimer(props: Props) {
     const [numberOfPomodoros, setNumberOfPomodoros] = useState(0)
 
     useInterval(() => {
-        setMainTime(mainTime - 1)
-    }, timeCouting ? 1000 : null)
+        setMainTime(prev => prev - 1)
+        if (working) setFullWorkingTime(prev => prev + 1)
+    }, timeCounting ? 1000 : null)
 
-    const configureWork = () => {
-        setTimeCouting(true)
+    const configureWork = useCallback(() => {
+        setTimeCounting(true)
         setWorking(true)
         setResting(false)
         setMainTime(props.pomodoroTime)
         audioStartWorking.play()
-    }
+    }, [props.pomodoroTime])
 
-    const configureRest = (long: boolean) => {
-        setTimeCouting(true)
+    const configureRest = useCallback((long: boolean) => {
+        setTimeCounting(true)
         setWorking(false)
         setResting(true)
-
-        if (long) {
-            setMainTime(props.longRestTime)
-        } else {
-            setMainTime(props.shortRestTime)
-        }
-
+        setMainTime(long ? props.longRestTime : props.shortRestTime)
         audioStopWorking.play()
-    }
+    }, [props.longRestTime, props.shortRestTime])
 
     useEffect(() => {
         if (working) document.body.classList.add('working')
@@ -60,42 +58,46 @@ export function PomodoroTimer(props: Props) {
 
         if (mainTime > 0) return
 
-        if (working && cyclesQtdManager.length > 0) {
-            configureRest(false)
-            cyclesQtdManager.pop()
-        } else if (working && cyclesQtdManager.length <= 0) {
-            configureRest(true)
-            setCyclesQtdManager(cyclesFilled)
-            setCompletedCycles(completedCycles + 1)
+        if (working) {
+            setNumberOfPomodoros(prev => prev + 1)
+
+            if (cyclesQtdManager.length > 0) {
+                configureRest(false)
+                setCyclesQtdManager(prev => prev.slice(0, -1))
+            } else {
+                configureRest(true)
+                setCyclesQtdManager(cyclesFilled)
+                setCompletedCycles(prev => prev + 1)
+            }
+        } else if (resting) {
+            configureWork()
         }
+
     }, [
         working,
         resting,
         mainTime,
-        cyclesQtdManager,
-        numberOfPomodoros,
-        completedCycles,
+        cyclesQtdManager.length,
         configureRest,
-        setCyclesQtdManager,
         configureWork,
-        props.cycles,
+        cyclesFilled
     ])
 
     return (
         <div className='pomodoro'>
-            <h2>You are: working</h2>
+            <h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
             <Timer mainTime={mainTime} />
             <div className='controls'>
-                <Button text='Work' onClick={() => configureWork()}></Button>
-                <Button text='Rest' onClick={() => configureRest(false)}></Button>
+                <Button text='Work' onClick={configureWork} />
+                <Button text='Rest' onClick={() => configureRest(false)} />
                 <Button
                     className={!working && !resting ? 'hidden' : ''}
-                    text={timeCouting ? 'Pause' : 'Play'}
-                    onClick={() => setTimeCouting(!timeCouting)}
-                ></Button>
+                    text={timeCounting ? 'Pause' : 'Play'}
+                    onClick={() => setTimeCounting(prev => !prev)}
+                />
             </div>
             <div className='details'>
-                <p>Ciclos comcluídos: {completedCycles}</p>
+                <p>Ciclos concluídos: {completedCycles}</p>
                 <p>Horas trabalhadas: {secondsToTime(fullWorkingTime)}</p>
                 <p>Pomodoros concluídos: {numberOfPomodoros}</p>
             </div>
