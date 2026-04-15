@@ -1,0 +1,27 @@
+services:
+  blog_strapi_api:
+    container_name: blog_strapi_api
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: blog-strapi
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  strapi:
+    container_name: strapi
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "sleep 10 && npm install && npm run develop"
+    ports:
+      - "1337:1337"
+    depends_on:
+      - blog_strapi_api
+    stdin_open: true
+    tty: true
